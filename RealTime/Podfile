@@ -1,0 +1,8 @@
+
+platform :ios, "8.0"
+#CocoaPods新加入的特性
+target "RealTime" do
+
+pod 'AMap3DMap','4.0.3'
+pod 'AFNetworking','3.1.0'
+end

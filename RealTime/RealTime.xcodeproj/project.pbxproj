@@ -1,0 +1,584 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7C197FF61E8372A2001A7281 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C197FF51E8372A2001A7281 /* SecondViewController.m */; };
+		7C197FF81E83B348001A7281 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C197FF71E83B348001A7281 /* SystemConfiguration.framework */; };
+		7C197FFB1E83C3B2001A7281 /* ElectricianStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C197FFA1E83C3B2001A7281 /* ElectricianStatusView.m */; };
+		7C197FFE1E83CA4C001A7281 /* MalfunctionStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C197FFD1E83CA4C001A7281 /* MalfunctionStatusView.m */; };
+		7C6A7BCB1E84EA33003494D9 /* OverHaulStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A7BCA1E84EA33003494D9 /* OverHaulStatusView.m */; };
+		7C6A7BCF1E84EC6A003494D9 /* trackingPoints@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C6A7BCE1E84EC6A003494D9 /* trackingPoints@2x.png */; };
+		7C6A7BD11E84EE07003494D9 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6A7BD01E84EE07003494D9 /* AMapSearchKit.framework */; };
+		7C6A7BDA1E84F0BD003494D9 /* LineDashPolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A7BD31E84F0BD003494D9 /* LineDashPolyline.m */; };
+		7C6A7BDB1E84F0BD003494D9 /* MANaviAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A7BD51E84F0BD003494D9 /* MANaviAnnotation.m */; };
+		7C6A7BDC1E84F0BD003494D9 /* MANaviPolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A7BD71E84F0BD003494D9 /* MANaviPolyline.m */; };
+		7C6A7BDD1E84F0BD003494D9 /* MANaviRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A7BD91E84F0BD003494D9 /* MANaviRoute.m */; };
+		7C6A7BE31E84F35C003494D9 /* ErrorInfoUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A7BE01E84F35C003494D9 /* ErrorInfoUtility.m */; };
+		7C6A7BE41E84F35C003494D9 /* CommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A7BE21E84F35C003494D9 /* CommonUtility.m */; };
+		7CB4F09A1E85FF9100D02374 /* CustomCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB4F0991E85FF9100D02374 /* CustomCalloutView.m */; };
+		7CE66A201E82435E005D2596 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE66A1F1E82435E005D2596 /* main.m */; };
+		7CE66A231E82435E005D2596 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE66A221E82435E005D2596 /* AppDelegate.m */; };
+		7CE66A261E82435E005D2596 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE66A251E82435E005D2596 /* ViewController.m */; };
+		7CE66A291E82435E005D2596 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CE66A271E82435E005D2596 /* Main.storyboard */; };
+		7CE66A2B1E82435E005D2596 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CE66A2A1E82435E005D2596 /* Assets.xcassets */; };
+		7CE66A2E1E82435E005D2596 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CE66A2C1E82435E005D2596 /* LaunchScreen.storyboard */; };
+		7CE66A461E8247D0005D2596 /* CACoordLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE66A3F1E8247D0005D2596 /* CACoordLayer.m */; };
+		7CE66A471E8247D0005D2596 /* MovingAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE66A411E8247D0005D2596 /* MovingAnnotationView.m */; };
+		7CE66A481E8247D0005D2596 /* TracingPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE66A431E8247D0005D2596 /* TracingPoint.m */; };
+		7CE66A491E8247D0005D2596 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE66A451E8247D0005D2596 /* Util.m */; };
+		7CE66A4C1E824F78005D2596 /* userPosition@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CE66A4B1E824F78005D2596 /* userPosition@2x.png */; };
+		7CE66A571E825EB3005D2596 /* NetWorkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE66A561E825EB3005D2596 /* NetWorkTool.m */; };
+		7CE66A5A1E825EC7005D2596 /* NetWorkClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE66A591E825EC7005D2596 /* NetWorkClass.m */; };
+		7CE66A5D1E827A24005D2596 /* XHMoveAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE66A5C1E827A24005D2596 /* XHMoveAnnotation.m */; };
+		9E13A01DDC6194B0F640DCDF /* libPods-RealTime.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E3A29346A64D6FAFA18DB8 /* libPods-RealTime.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0643D8D88D5E55FBC16D5DE0 /* Pods-RealTime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealTime.release.xcconfig"; path = "Pods/Target Support Files/Pods-RealTime/Pods-RealTime.release.xcconfig"; sourceTree = "<group>"; };
+		65E3A29346A64D6FAFA18DB8 /* libPods-RealTime.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RealTime.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C197FF41E8372A2001A7281 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		7C197FF51E8372A2001A7281 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		7C197FF71E83B348001A7281 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		7C197FF91E83C3B2001A7281 /* ElectricianStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElectricianStatusView.h; sourceTree = "<group>"; };
+		7C197FFA1E83C3B2001A7281 /* ElectricianStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElectricianStatusView.m; sourceTree = "<group>"; };
+		7C197FFC1E83CA4C001A7281 /* MalfunctionStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MalfunctionStatusView.h; sourceTree = "<group>"; };
+		7C197FFD1E83CA4C001A7281 /* MalfunctionStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MalfunctionStatusView.m; sourceTree = "<group>"; };
+		7C6A7BC91E84EA33003494D9 /* OverHaulStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverHaulStatusView.h; sourceTree = "<group>"; };
+		7C6A7BCA1E84EA33003494D9 /* OverHaulStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverHaulStatusView.m; sourceTree = "<group>"; };
+		7C6A7BCE1E84EC6A003494D9 /* trackingPoints@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trackingPoints@2x.png"; sourceTree = "<group>"; };
+		7C6A7BD01E84EE07003494D9 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = RealTime/AMapSearchKit.framework; sourceTree = "<group>"; };
+		7C6A7BD21E84F0BD003494D9 /* LineDashPolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineDashPolyline.h; sourceTree = "<group>"; };
+		7C6A7BD31E84F0BD003494D9 /* LineDashPolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineDashPolyline.m; sourceTree = "<group>"; };
+		7C6A7BD41E84F0BD003494D9 /* MANaviAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MANaviAnnotation.h; sourceTree = "<group>"; };
+		7C6A7BD51E84F0BD003494D9 /* MANaviAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MANaviAnnotation.m; sourceTree = "<group>"; };
+		7C6A7BD61E84F0BD003494D9 /* MANaviPolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MANaviPolyline.h; sourceTree = "<group>"; };
+		7C6A7BD71E84F0BD003494D9 /* MANaviPolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MANaviPolyline.m; sourceTree = "<group>"; };
+		7C6A7BD81E84F0BD003494D9 /* MANaviRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MANaviRoute.h; sourceTree = "<group>"; };
+		7C6A7BD91E84F0BD003494D9 /* MANaviRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MANaviRoute.m; sourceTree = "<group>"; };
+		7C6A7BDF1E84F35C003494D9 /* ErrorInfoUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorInfoUtility.h; sourceTree = "<group>"; };
+		7C6A7BE01E84F35C003494D9 /* ErrorInfoUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorInfoUtility.m; sourceTree = "<group>"; };
+		7C6A7BE11E84F35C003494D9 /* CommonUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtility.h; sourceTree = "<group>"; };
+		7C6A7BE21E84F35C003494D9 /* CommonUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtility.m; sourceTree = "<group>"; };
+		7CB4F0981E85FF9100D02374 /* CustomCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCalloutView.h; sourceTree = "<group>"; };
+		7CB4F0991E85FF9100D02374 /* CustomCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCalloutView.m; sourceTree = "<group>"; };
+		7CE66A1B1E82435E005D2596 /* RealTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CE66A1F1E82435E005D2596 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7CE66A211E82435E005D2596 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		7CE66A221E82435E005D2596 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7CE66A241E82435E005D2596 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		7CE66A251E82435E005D2596 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		7CE66A281E82435E005D2596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7CE66A2A1E82435E005D2596 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7CE66A2D1E82435E005D2596 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7CE66A2F1E82435E005D2596 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7CE66A3E1E8247D0005D2596 /* CACoordLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CACoordLayer.h; sourceTree = "<group>"; };
+		7CE66A3F1E8247D0005D2596 /* CACoordLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CACoordLayer.m; sourceTree = "<group>"; };
+		7CE66A401E8247D0005D2596 /* MovingAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovingAnnotationView.h; sourceTree = "<group>"; };
+		7CE66A411E8247D0005D2596 /* MovingAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovingAnnotationView.m; sourceTree = "<group>"; };
+		7CE66A421E8247D0005D2596 /* TracingPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracingPoint.h; sourceTree = "<group>"; };
+		7CE66A431E8247D0005D2596 /* TracingPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracingPoint.m; sourceTree = "<group>"; };
+		7CE66A441E8247D0005D2596 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		7CE66A451E8247D0005D2596 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
+		7CE66A4B1E824F78005D2596 /* userPosition@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userPosition@2x.png"; sourceTree = "<group>"; };
+		7CE66A551E825EB3005D2596 /* NetWorkTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkTool.h; sourceTree = "<group>"; };
+		7CE66A561E825EB3005D2596 /* NetWorkTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkTool.m; sourceTree = "<group>"; };
+		7CE66A581E825EC7005D2596 /* NetWorkClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkClass.h; sourceTree = "<group>"; };
+		7CE66A591E825EC7005D2596 /* NetWorkClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkClass.m; sourceTree = "<group>"; };
+		7CE66A5B1E827A24005D2596 /* XHMoveAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHMoveAnnotation.h; sourceTree = "<group>"; };
+		7CE66A5C1E827A24005D2596 /* XHMoveAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHMoveAnnotation.m; sourceTree = "<group>"; };
+		CD7944189F72ADA3DC830DCE /* Pods-RealTime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealTime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RealTime/Pods-RealTime.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7CE66A181E82435D005D2596 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7C6A7BD11E84EE07003494D9 /* AMapSearchKit.framework in Frameworks */,
+				7C197FF81E83B348001A7281 /* SystemConfiguration.framework in Frameworks */,
+				9E13A01DDC6194B0F640DCDF /* libPods-RealTime.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		09AFDE8ACC871537DC936194 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CD7944189F72ADA3DC830DCE /* Pods-RealTime.debug.xcconfig */,
+				0643D8D88D5E55FBC16D5DE0 /* Pods-RealTime.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7C6A7BCC1E84EB8B003494D9 /* 显示距离和时间视图 */ = {
+			isa = PBXGroup;
+			children = (
+				7C197FF91E83C3B2001A7281 /* ElectricianStatusView.h */,
+				7C197FFA1E83C3B2001A7281 /* ElectricianStatusView.m */,
+				7C6A7BC91E84EA33003494D9 /* OverHaulStatusView.h */,
+				7C6A7BCA1E84EA33003494D9 /* OverHaulStatusView.m */,
+			);
+			name = "显示距离和时间视图";
+			sourceTree = "<group>";
+		};
+		7C6A7BCD1E84EBA3003494D9 /* 显示检修地点视图 */ = {
+			isa = PBXGroup;
+			children = (
+				7C197FFC1E83CA4C001A7281 /* MalfunctionStatusView.h */,
+				7C197FFD1E83CA4C001A7281 /* MalfunctionStatusView.m */,
+			);
+			name = "显示检修地点视图";
+			sourceTree = "<group>";
+		};
+		7C6A7BDE1E84F0CC003494D9 /* RouteModel */ = {
+			isa = PBXGroup;
+			children = (
+				7C6A7BD21E84F0BD003494D9 /* LineDashPolyline.h */,
+				7C6A7BD31E84F0BD003494D9 /* LineDashPolyline.m */,
+				7C6A7BD41E84F0BD003494D9 /* MANaviAnnotation.h */,
+				7C6A7BD51E84F0BD003494D9 /* MANaviAnnotation.m */,
+				7C6A7BD61E84F0BD003494D9 /* MANaviPolyline.h */,
+				7C6A7BD71E84F0BD003494D9 /* MANaviPolyline.m */,
+				7C6A7BD81E84F0BD003494D9 /* MANaviRoute.h */,
+				7C6A7BD91E84F0BD003494D9 /* MANaviRoute.m */,
+			);
+			name = RouteModel;
+			sourceTree = "<group>";
+		};
+		7C6A7BE51E84F366003494D9 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				7C6A7BDF1E84F35C003494D9 /* ErrorInfoUtility.h */,
+				7C6A7BE01E84F35C003494D9 /* ErrorInfoUtility.m */,
+				7C6A7BE11E84F35C003494D9 /* CommonUtility.h */,
+				7C6A7BE21E84F35C003494D9 /* CommonUtility.m */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		7CE66A121E82435D005D2596 = {
+			isa = PBXGroup;
+			children = (
+				7CE66A1D1E82435E005D2596 /* RealTime */,
+				7CE66A1C1E82435E005D2596 /* Products */,
+				09AFDE8ACC871537DC936194 /* Pods */,
+				ED6B2AD597E8216617D0FC76 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		7CE66A1C1E82435E005D2596 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7CE66A1B1E82435E005D2596 /* RealTime.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7CE66A1D1E82435E005D2596 /* RealTime */ = {
+			isa = PBXGroup;
+			children = (
+				7CE66A211E82435E005D2596 /* AppDelegate.h */,
+				7CE66A221E82435E005D2596 /* AppDelegate.m */,
+				7CE66A241E82435E005D2596 /* ViewController.h */,
+				7CE66A251E82435E005D2596 /* ViewController.m */,
+				7C197FF41E8372A2001A7281 /* SecondViewController.h */,
+				7C197FF51E8372A2001A7281 /* SecondViewController.m */,
+				7C6A7BCD1E84EBA3003494D9 /* 显示检修地点视图 */,
+				7C6A7BCC1E84EB8B003494D9 /* 显示距离和时间视图 */,
+				7CB4F0981E85FF9100D02374 /* CustomCalloutView.h */,
+				7CB4F0991E85FF9100D02374 /* CustomCalloutView.m */,
+				7CE66A5B1E827A24005D2596 /* XHMoveAnnotation.h */,
+				7CE66A5C1E827A24005D2596 /* XHMoveAnnotation.m */,
+				7C6A7BE51E84F366003494D9 /* Utility */,
+				7C6A7BDE1E84F0CC003494D9 /* RouteModel */,
+				7CE66A4A1E8247DB005D2596 /* MovingAnnotationSource */,
+				7CE66A3B1E824555005D2596 /* NetWork */,
+				7CE66A271E82435E005D2596 /* Main.storyboard */,
+				7CE66A2A1E82435E005D2596 /* Assets.xcassets */,
+				7CE66A2C1E82435E005D2596 /* LaunchScreen.storyboard */,
+				7CE66A2F1E82435E005D2596 /* Info.plist */,
+				7CE66A4B1E824F78005D2596 /* userPosition@2x.png */,
+				7C6A7BCE1E84EC6A003494D9 /* trackingPoints@2x.png */,
+				7CE66A1E1E82435E005D2596 /* Supporting Files */,
+			);
+			path = RealTime;
+			sourceTree = "<group>";
+		};
+		7CE66A1E1E82435E005D2596 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7CE66A1F1E82435E005D2596 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7CE66A3B1E824555005D2596 /* NetWork */ = {
+			isa = PBXGroup;
+			children = (
+				7CE66A551E825EB3005D2596 /* NetWorkTool.h */,
+				7CE66A561E825EB3005D2596 /* NetWorkTool.m */,
+				7CE66A581E825EC7005D2596 /* NetWorkClass.h */,
+				7CE66A591E825EC7005D2596 /* NetWorkClass.m */,
+			);
+			name = NetWork;
+			sourceTree = "<group>";
+		};
+		7CE66A4A1E8247DB005D2596 /* MovingAnnotationSource */ = {
+			isa = PBXGroup;
+			children = (
+				7CE66A3E1E8247D0005D2596 /* CACoordLayer.h */,
+				7CE66A3F1E8247D0005D2596 /* CACoordLayer.m */,
+				7CE66A401E8247D0005D2596 /* MovingAnnotationView.h */,
+				7CE66A411E8247D0005D2596 /* MovingAnnotationView.m */,
+				7CE66A421E8247D0005D2596 /* TracingPoint.h */,
+				7CE66A431E8247D0005D2596 /* TracingPoint.m */,
+				7CE66A441E8247D0005D2596 /* Util.h */,
+				7CE66A451E8247D0005D2596 /* Util.m */,
+			);
+			name = MovingAnnotationSource;
+			sourceTree = "<group>";
+		};
+		ED6B2AD597E8216617D0FC76 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7C6A7BD01E84EE07003494D9 /* AMapSearchKit.framework */,
+				7C197FF71E83B348001A7281 /* SystemConfiguration.framework */,
+				65E3A29346A64D6FAFA18DB8 /* libPods-RealTime.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7CE66A1A1E82435D005D2596 /* RealTime */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7CE66A321E82435E005D2596 /* Build configuration list for PBXNativeTarget "RealTime" */;
+			buildPhases = (
+				DDF532B5A8A5CCD8CECBB497 /* [CP] Check Pods Manifest.lock */,
+				7CE66A171E82435D005D2596 /* Sources */,
+				7CE66A181E82435D005D2596 /* Frameworks */,
+				7CE66A191E82435D005D2596 /* Resources */,
+				463C2B7E067E8B3A0F973107 /* [CP] Embed Pods Frameworks */,
+				A72FC2B8E1765C33A5E599E6 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RealTime;
+			productName = RealTime;
+			productReference = 7CE66A1B1E82435E005D2596 /* RealTime.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7CE66A131E82435D005D2596 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = huhaifeng;
+				TargetAttributes = {
+					7CE66A1A1E82435D005D2596 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 8JRTUMAY2K;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 7CE66A161E82435D005D2596 /* Build configuration list for PBXProject "RealTime" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7CE66A121E82435D005D2596;
+			productRefGroup = 7CE66A1C1E82435E005D2596 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7CE66A1A1E82435D005D2596 /* RealTime */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7CE66A191E82435D005D2596 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CE66A4C1E824F78005D2596 /* userPosition@2x.png in Resources */,
+				7CE66A2E1E82435E005D2596 /* LaunchScreen.storyboard in Resources */,
+				7C6A7BCF1E84EC6A003494D9 /* trackingPoints@2x.png in Resources */,
+				7CE66A2B1E82435E005D2596 /* Assets.xcassets in Resources */,
+				7CE66A291E82435E005D2596 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		463C2B7E067E8B3A0F973107 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RealTime/Pods-RealTime-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A72FC2B8E1765C33A5E599E6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RealTime/Pods-RealTime-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DDF532B5A8A5CCD8CECBB497 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7CE66A171E82435D005D2596 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7CE66A571E825EB3005D2596 /* NetWorkTool.m in Sources */,
+				7CE66A5D1E827A24005D2596 /* XHMoveAnnotation.m in Sources */,
+				7C6A7BCB1E84EA33003494D9 /* OverHaulStatusView.m in Sources */,
+				7CE66A261E82435E005D2596 /* ViewController.m in Sources */,
+				7C6A7BDB1E84F0BD003494D9 /* MANaviAnnotation.m in Sources */,
+				7CE66A5A1E825EC7005D2596 /* NetWorkClass.m in Sources */,
+				7C197FFB1E83C3B2001A7281 /* ElectricianStatusView.m in Sources */,
+				7CE66A481E8247D0005D2596 /* TracingPoint.m in Sources */,
+				7C6A7BDA1E84F0BD003494D9 /* LineDashPolyline.m in Sources */,
+				7C6A7BDD1E84F0BD003494D9 /* MANaviRoute.m in Sources */,
+				7CE66A471E8247D0005D2596 /* MovingAnnotationView.m in Sources */,
+				7C6A7BE41E84F35C003494D9 /* CommonUtility.m in Sources */,
+				7C6A7BE31E84F35C003494D9 /* ErrorInfoUtility.m in Sources */,
+				7CE66A461E8247D0005D2596 /* CACoordLayer.m in Sources */,
+				7CE66A231E82435E005D2596 /* AppDelegate.m in Sources */,
+				7CB4F09A1E85FF9100D02374 /* CustomCalloutView.m in Sources */,
+				7C197FFE1E83CA4C001A7281 /* MalfunctionStatusView.m in Sources */,
+				7C197FF61E8372A2001A7281 /* SecondViewController.m in Sources */,
+				7C6A7BDC1E84F0BD003494D9 /* MANaviPolyline.m in Sources */,
+				7CE66A201E82435E005D2596 /* main.m in Sources */,
+				7CE66A491E8247D0005D2596 /* Util.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7CE66A271E82435E005D2596 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7CE66A281E82435E005D2596 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7CE66A2C1E82435E005D2596 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7CE66A2D1E82435E005D2596 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7CE66A301E82435E005D2596 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		7CE66A311E82435E005D2596 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7CE66A331E82435E005D2596 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD7944189F72ADA3DC830DCE /* Pods-RealTime.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 8JRTUMAY2K;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RealTime",
+				);
+				INFOPLIST_FILE = RealTime/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xsk.RealTime;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7CE66A341E82435E005D2596 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0643D8D88D5E55FBC16D5DE0 /* Pods-RealTime.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 8JRTUMAY2K;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/RealTime",
+				);
+				INFOPLIST_FILE = RealTime/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.xsk.RealTime;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7CE66A161E82435D005D2596 /* Build configuration list for PBXProject "RealTime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CE66A301E82435E005D2596 /* Debug */,
+				7CE66A311E82435E005D2596 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7CE66A321E82435E005D2596 /* Build configuration list for PBXNativeTarget "RealTime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CE66A331E82435E005D2596 /* Debug */,
+				7CE66A341E82435E005D2596 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7CE66A131E82435D005D2596 /* Project object */;
+}
