@@ -9,6 +9,7 @@
 #define MALSTATUSHH 150
 #define NAVHH 64
 #define STATUSHH 200
+#define ShowViewKey @"设备"
 #import "SecondViewController.h"
 #import "XHMoveAnnotation.h"
 #import "MovingAnnotationView.h"
@@ -23,25 +24,19 @@
 #import "MANaviRoute.h"
 #import "CommonUtility.h"
 
-static const NSInteger RoutePlanningPaddingEdge                    = 20;
+static const NSInteger RoutePlanningPaddingEdge = 20;
 @interface SecondViewController ()
-<MAMapViewDelegate,AMapSearchDelegate>
-
+<MAMapViewDelegate,AMapSearchDelegate,OverHaulButtonClickMethodDelegate>
+{
+    
+    MAPolyline *route;
+}
 @property (nonatomic, strong) MAMapView *map;
 
-@property (nonatomic, assign) MAMapPoint lastPoint;
+@property (nonatomic, strong) NSMutableArray * routeAnno;
 
-
-//测试专用
-@property (nonatomic, strong) UILabel *showLabel;
-//测试专用
-@property (nonatomic, strong) UILabel *latlongLabel;
-
-@property (nonatomic, assign) MAMapPoint ceshiPoint;
-
-
-
-@property (nonatomic, strong) AMapRoute *route;
+//用户地理位置实时更新
+@property (nonatomic, assign) MAMapPoint startPoint;
 /* 当前路线方案索引值. */
 @property (nonatomic) NSInteger currentCourse;
 /* 路线方案个数. */
@@ -57,64 +52,93 @@ static const NSInteger RoutePlanningPaddingEdge                    = 20;
 @end
 
 @implementation SecondViewController
+static int locationOnce =0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
    
     [self.view addSubview:self.map];
     
-    [self.view addSubview:self.showLabel];
-    [self.view bringSubviewToFront:self.showLabel];
-    
-    [self.view addSubview:self.latlongLabel];
-    [self.view bringSubviewToFront:self.latlongLabel];
-    self.showLabel.text =@"start !";
-    
-    //两个点相同
+    locationOnce =0;
+    self.orderType =OrderStatusTypeNormal;
+
     self.destinationCoordinate  = CLLocationCoordinate2DMake(31.57624122, 120.30021787);
-    self.ceshiPoint =MAMapPointForCoordinate(CLLocationCoordinate2DMake(31.57624122,120.30021787));
     
     [self.view bringSubviewToFront:self.statusView];
     [self.view bringSubviewToFront:self.malStatusView];
     self.statusViewBottomLayout.constant =-STATUSHH;
     self.malStatusViewTopLayout.constant =-MALSTATUSHH +NAVHH;
+    
+    self.search = [[AMapSearchAPI alloc] init];
+    self.search.delegate = self;
+}
+
+- (void)GetNetWorkData
+{
+    //网络请求获得终点数据
+    self.destinationCoordinate =MACoordinateForMapPoint(MAMapPointForCoordinate(CLLocationCoordinate2DMake(31.57624122,120.30021787)));
+    
+    CLLocationCoordinate2D start =MACoordinateForMapPoint(self.startPoint);
+    if (start.latitude <0 || start.longitude <0)
+    {
+        //定位失败 不用规划线路
+        return;
+    }
+    //两点一线 测试专用
+    [self drawTestRoute];
+    
+    //绘制路线
+    [self drawTheRoute];
+}
+
+- (void)drawTestRoute
+{
+    //绘制路线
+    CLLocationCoordinate2D start =MACoordinateForMapPoint(self.startPoint);
+    CLLocationCoordinate2D stop =self.destinationCoordinate;
+    CLLocationCoordinate2D * coords = malloc(2 * sizeof(CLLocationCoordinate2D));
+    coords[0] =CLLocationCoordinate2DMake(start.latitude,start.longitude);
+    coords[1] =CLLocationCoordinate2DMake(stop.latitude,stop.longitude);
+    if (route)
+    {
+        [self.map removeOverlay:route];
+    }
+    route = [MAPolyline polylineWithCoordinates:coords count:2];
+    [self.map addOverlay:route];
 }
 
 #pragma mark --规划线路
 - (void)drawTheRoute
 {
-    //绘制路线
-    CLLocationCoordinate2D start =MACoordinateForMapPoint(self.lastPoint);
-    CLLocationCoordinate2D stop =MACoordinateForMapPoint(self.ceshiPoint);
-    if (start.latitude <0 || start.longitude <0)
-    {
-        //定位失败
-        return;
-    }
-    CLLocationCoordinate2D * coords = malloc(2 * sizeof(CLLocationCoordinate2D));
-    coords[0] =CLLocationCoordinate2DMake(start.latitude,start.longitude);
-    coords[1] =CLLocationCoordinate2DMake(stop.latitude,stop.longitude);
-    [self showRouteForCoords:coords count:2];
-    
+    //添加标注
+    [self initAnnotations];
     
     //规划路线
-    self.startCoordinate =start;
-    self.destinationCoordinate =stop;
-    
-    self.search = [[AMapSearchAPI alloc] init];
-    self.search.delegate = self;
+    CLLocationCoordinate2D start =MACoordinateForMapPoint(self.startPoint);
     
     AMapDrivingRouteSearchRequest *navi = [[AMapDrivingRouteSearchRequest alloc] init];
     
     navi.requireExtension = YES;
     navi.strategy = 0;//速度优先
-    /* 出发点. */
-    navi.origin = [AMapGeoPoint locationWithLatitude:self.startCoordinate.latitude
-                                           longitude:self.startCoordinate.longitude];
+    
+    static int ceshi =0;
+    if (ceshi ==0)
+    {
+        /* 出发点. */
+        navi.origin = [AMapGeoPoint locationWithLatitude:start.latitude
+                                               longitude:start.longitude];
+
+    }
+   else
+   {
+       /* 出发点. */
+       navi.origin = [AMapGeoPoint locationWithLatitude:31.5938896
+                                              longitude:120.3171587];
+   }
     /* 目的地. */
     navi.destination = [AMapGeoPoint locationWithLatitude:self.destinationCoordinate.latitude
                                                 longitude:self.destinationCoordinate.longitude];
-    
+    ++ceshi;
     [self.search AMapDrivingRouteSearch:navi];
 }
 
@@ -122,36 +146,38 @@ static const NSInteger RoutePlanningPaddingEdge                    = 20;
 -(void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation
 updatingLocation:(BOOL)updatingLocation
 {
-    self.latlongLabel.text =[NSString stringWithFormat:@" %f,%f %d\n",userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude,updatingLocation];
-    
     if (userLocation.location.coordinate.latitude >0 &&userLocation.location.coordinate.longitude >0)
     {
-        static int once =0;
-        if (once ==0)
+        if (locationOnce ==0)
         {
-            ++once;
-            self.lastPoint =MAMapPointForCoordinate(CLLocationCoordinate2DMake(userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude));
-            
+            ++locationOnce;//每次用户进入页面 更新一次定位数据
+            self.startPoint =MAMapPointForCoordinate(CLLocationCoordinate2DMake(userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude));
             [self.map setCenterCoordinate:userLocation.location.coordinate animated:YES];
             
-            //获取定位成功开始规划路径
+            if (self.orderType ==OrderStatusTypeNormal)
+            {
+                [self drawTheRoute];//规划路线
+            }
+        }
+    }
+    if (self.orderType ==OrderStatusTypeNormal)
+    {
+        MAMapPoint start =MAMapPointForCoordinate(CLLocationCoordinate2DMake(userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude));
+        if ([self isGreaterThanHectometre:self.startPoint stop:start])
+        {
+            self.startPoint =start;//每上传一次地理位置信息 更新一遍定位数据
+            //上传地理位置信息
+            
+            //上传一次地理位置 重新规划一遍线路
             [self drawTheRoute];
         }
-        
     }
-    
-    MAMapPoint startPoint =MAMapPointForCoordinate(CLLocationCoordinate2DMake(userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude));
-    static int num =0;
-    if ([self isGreaterThanHectometre:self.lastPoint stop:startPoint])
-    {
-        ++num;
-        //上传地理位置信息
-        self.showLabel.text =[NSString stringWithFormat:@"提交次数:%d lat:%f long:%f",num,userLocation.location.coordinate.latitude ,userLocation.location.coordinate.longitude];
-        self.lastPoint =startPoint;
-    }
-    
-    //实时刷新用户距离地点长度
-    //self.statusView.distanceLabel.text =[self distanceForUserLocation];
+}
+
+#pragma mark --抵达现场按钮回调--
+- (void)overHaulButtonClick:(UIButton *)sender
+{
+    //电工地理位置提交后台  更新订单状态OrderStatusType 停止绘制路线 ElectricianStatusView 中的  图片更改状态 时间 距离归零
 }
 
 #pragma mark - 地图返回标注代理 --
@@ -181,52 +207,19 @@ updatingLocation:(BOOL)updatingLocation
     return nil;
 }
 
-#pragma mark --选中标注--
-- (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view
+- (void)initAnnotations
 {
-    if ([view isKindOfClass:[MovingAnnotationView class]])
+    CLLocationCoordinate2D start =MACoordinateForMapPoint(self.startPoint);
+    CLLocationCoordinate2D stop =self.destinationCoordinate;
+    CLLocationCoordinate2D * coords = malloc(2 * sizeof(CLLocationCoordinate2D));
+    coords[0] =CLLocationCoordinate2DMake(start.latitude,start.longitude);
+    coords[1] =CLLocationCoordinate2DMake(stop.latitude,stop.longitude);
+    if (self.routeAnno)
     {
-        XHMoveAnnotation * xhMoveAnnotation =view.annotation;
-        if ([xhMoveAnnotation.title isEqualToString:@"设备"])
-        {
-            self.statusViewBottomLayout.constant =0;
-            self.malStatusViewTopLayout.constant =NAVHH;
-            [UIView animateWithDuration:0.4 animations:^{
-                [self.view layoutIfNeeded];
-            }];
-        }
-        
+        [self.map removeAnnotations:self.routeAnno];
     }
-}
-
-#pragma mark --点击地图空白地方--
-- (void)mapView:(MAMapView *)mapView didDeselectAnnotationView:(MAAnnotationView *)view
-{
-    if ([view isKindOfClass:[MovingAnnotationView class]])
-    {
-        XHMoveAnnotation * xhMoveAnnotation =view.annotation;
-        if ([xhMoveAnnotation.title isEqualToString:@"设备"])
-        {
-            self.statusViewBottomLayout.constant =-STATUSHH;
-            self.malStatusViewTopLayout.constant =-MALSTATUSHH-NAVHH;
-            
-            [UIView animateWithDuration:0.4 animations:^{
-                [self.view layoutIfNeeded];
-            }];
-        }
-        
-    }
-
-}
-#pragma mark --绘制路线--
-- (void)showRouteForCoords:(CLLocationCoordinate2D *)coords count:(NSUInteger)count
-{
-    //show route
-    MAPolyline *route = [MAPolyline polylineWithCoordinates:coords count:count];
-    [self.map addOverlay:route];
-    
-    NSMutableArray * routeAnno = [NSMutableArray array];
-    for (int i = 0 ; i < count; i++)
+    self.routeAnno = [NSMutableArray array];
+    for (int i = 0 ; i < 2; i++)
     {
         XHMoveAnnotation * a = [[XHMoveAnnotation alloc] init];
         a.coordinate = coords[i];
@@ -236,13 +229,14 @@ updatingLocation:(BOOL)updatingLocation
         }
         else
         {
-            a.title = @"设备";
+            a.title = ShowViewKey;
         }
         a.subtitle =@"route";
-        [routeAnno addObject:a];
+        [self.routeAnno addObject:a];
     }
-    [self.map addAnnotations:routeAnno];
-    [self.map showAnnotations:routeAnno animated:NO];
+    [self.map addAnnotations:self.routeAnno];
+    [self.map showAnnotations:self.routeAnno animated:NO];
+    
 }
 
 #pragma mark --绘制线路的颜色--
@@ -305,23 +299,21 @@ updatingLocation:(BOOL)updatingLocation
     return nil;
 }
 
-#pragma mark --路径规划搜索回调--
+#pragma mark --路径规划成功搜索回调--
 - (void)onRouteSearchDone:(AMapRouteSearchBaseRequest *)request response:(AMapRouteSearchResponse *)response
 {
     if (response.route == nil)
     {
         return;
     }
-    self.route = response.route;
-    self.totalCourse = self.route.paths.count;
+    self.totalCourse = response.route.paths.count;
     self.currentCourse = 0;
     if (response.count > 0)
-    {
-        [self presentCurrentCourse];
+    {//绘制路线颜色
+        [self presentCurrentCourse:response.route];
     }
-    AMapPath * path =self.route.paths[self.currentCourse];
-    NSLog(@"path.distance:%ld \n",(long)path.distance);//第0条 路线总长
-    NSLog(@"path.duration:%ld \n",(long)path.duration);//第0条 路线耗时 s
+    AMapPath * path =response.route.paths[self.currentCourse];
+
     if (path.distance>1000)
     {
         self.statusView.distanceLabel.text =[NSString stringWithFormat:@"%.1ld",path.distance/1000];
@@ -338,21 +330,68 @@ updatingLocation:(BOOL)updatingLocation
         }
     }
     self.statusView.timeLabel.text =[NSString stringWithFormat:@"%ld",path.duration>60?path.duration/60:1];
+    
+    NSLog(@"path.distance:%ld \n",(long)path.distance);//第0条 路线总长
+    NSLog(@"path.duration:%ld \n",(long)path.duration);//第0条 路线耗时 s
 }
 
 
 
 #pragma mark --展示当前路线方案-
-- (void)presentCurrentCourse
+- (void)presentCurrentCourse:(AMapRoute *)mapRoute
 {
+
+    CLLocationCoordinate2D start =MACoordinateForMapPoint(self.startPoint);
+    if (self.naviRoute)
+    {
+        [self.naviRoute removeFromMapView];
+    }
     MANaviAnnotationType type = MANaviAnnotationTypeDrive;
-    self.naviRoute = [MANaviRoute naviRouteForPath:self.route.paths[self.currentCourse] withNaviType:type showTraffic:YES startPoint:[AMapGeoPoint locationWithLatitude:self.startCoordinate.latitude longitude:self.startCoordinate.longitude] endPoint:[AMapGeoPoint locationWithLatitude:self.destinationCoordinate.latitude longitude:self.destinationCoordinate.longitude]];
+    self.naviRoute = [MANaviRoute naviRouteForPath:mapRoute.paths[self.currentCourse] withNaviType:type showTraffic:YES startPoint:[AMapGeoPoint locationWithLatitude:start.latitude longitude:start.longitude] endPoint:[AMapGeoPoint locationWithLatitude:self.destinationCoordinate.latitude longitude:self.destinationCoordinate.longitude]];
     [self.naviRoute addToMapView:self.map];
     
     /* 缩放地图使其适应polylines的展示. */
     [self.map setVisibleMapRect:[CommonUtility mapRectForOverlays:self.naviRoute.routePolylines]
                         edgePadding:UIEdgeInsetsMake(RoutePlanningPaddingEdge, RoutePlanningPaddingEdge, RoutePlanningPaddingEdge, RoutePlanningPaddingEdge)
                            animated:YES];
+}
+
+#pragma mark --选中标注--
+- (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view
+{
+    if ([view isKindOfClass:[MovingAnnotationView class]])
+    {
+        XHMoveAnnotation * xhMoveAnnotation =view.annotation;
+        if ([xhMoveAnnotation.title isEqualToString:ShowViewKey])
+        {
+            self.statusViewBottomLayout.constant =0;
+            self.malStatusViewTopLayout.constant =NAVHH;
+            [UIView animateWithDuration:0.4 animations:^{
+                [self.view layoutIfNeeded];
+            }];
+        }
+        
+    }
+}
+
+#pragma mark --点击地图空白地方--
+- (void)mapView:(MAMapView *)mapView didDeselectAnnotationView:(MAAnnotationView *)view
+{
+    if ([view isKindOfClass:[MovingAnnotationView class]])
+    {
+        XHMoveAnnotation * xhMoveAnnotation =view.annotation;
+        if ([xhMoveAnnotation.title isEqualToString:ShowViewKey])
+        {
+            self.statusViewBottomLayout.constant =-STATUSHH;
+            self.malStatusViewTopLayout.constant =-MALSTATUSHH-NAVHH;
+            
+            [UIView animateWithDuration:0.4 animations:^{
+                [self.view layoutIfNeeded];
+            }];
+        }
+        
+    }
+    
 }
 
 #pragma mark -路径规划失败 --
@@ -391,7 +430,8 @@ updatingLocation:(BOOL)updatingLocation
 #pragma mark --两点间的直线距离--
 - (NSString *)distanceForUserLocation
 {
-    CLLocationDistance distance =MAMetersBetweenMapPoints(self.lastPoint,self.ceshiPoint);
+    MAMapPoint endPoint =MAMapPointForCoordinate(CLLocationCoordinate2DMake(self.destinationCoordinate.latitude,self.destinationCoordinate.longitude));
+    CLLocationDistance distance =MAMetersBetweenMapPoints(self.startPoint,endPoint);
     NSString *str =[NSString stringWithFormat:@"%.f",fabs(distance)/1000];//两点间的距离 加不加绝对值无所谓
     return str;
 }
@@ -420,28 +460,6 @@ updatingLocation:(BOOL)updatingLocation
         }
     }
     return [cset countForObject:@"awdl0"] > 1 ? YES : NO;
-}
-
-- (UILabel *)showLabel
-{
-    if (_showLabel ==nil)
-    {
-        _showLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height -30, self.view.frame.size.width, 30)];
-        _showLabel.font =[UIFont systemFontOfSize:15];
-        _showLabel.textAlignment =NSTextAlignmentCenter;
-    }
-    return _showLabel;
-}
-
-- (UILabel *)latlongLabel
-{
-    if (_latlongLabel ==nil)
-    {
-        _latlongLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 70, self.view.frame.size.width, 30)];
-        _latlongLabel.font =[UIFont systemFontOfSize:15];
-        _latlongLabel.textAlignment =NSTextAlignmentCenter;
-    }
-    return _latlongLabel;
 }
 
 - (MAMapView *)map

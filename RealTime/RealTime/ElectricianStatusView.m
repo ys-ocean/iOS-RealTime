@@ -14,6 +14,15 @@
 {
     [super awakeFromNib];
     
+    
 }
 
+
+- (IBAction)ButtonClick:(UIButton *)sender
+{
+    if ([self.delegate respondsToSelector:@selector(overHaulButtonClick:)])
+    {
+        [self.delegate overHaulButtonClick:sender];
+    }
+}
 @end
