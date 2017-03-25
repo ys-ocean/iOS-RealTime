@@ -5,7 +5,7 @@
 //  Created by huhaifeng on 2017/3/23.
 //  Copyright © 2017年 huhaifeng. All rights reserved.
 //
-#define LowMeter 15
+#define LowMeter 15000000000
 #define MALSTATUSHH 150
 #define NAVHH 64
 #define STATUSHH 200
@@ -24,12 +24,13 @@
 #import "MANaviRoute.h"
 #import "CommonUtility.h"
 
-static const NSInteger RoutePlanningPaddingEdge = 20;
+//static const NSInteger RoutePlanningPaddingEdge = 20;
 @interface SecondViewController ()
 <MAMapViewDelegate,AMapSearchDelegate,OverHaulButtonClickMethodDelegate>
 {
     
     MAPolyline *route;
+    
 }
 @property (nonatomic, strong) MAMapView *map;
 
@@ -53,15 +54,15 @@ static const NSInteger RoutePlanningPaddingEdge = 20;
 
 @implementation SecondViewController
 static int locationOnce =0;
-
+static int ceshi =0;
 - (void)viewDidLoad {
     [super viewDidLoad];
    
     [self.view addSubview:self.map];
     
     locationOnce =0;
+    ceshi =0;
     self.orderType =OrderStatusTypeNormal;
-
     self.destinationCoordinate  = CLLocationCoordinate2DMake(31.57624122, 120.30021787);
     
     [self.view bringSubviewToFront:self.statusView];
@@ -71,12 +72,38 @@ static int locationOnce =0;
     
     self.search = [[AMapSearchAPI alloc] init];
     self.search.delegate = self;
+    
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    self.map.zoomLevel =14.0;
+    if (![self isWiFiEnabled])
+    {
+        NSLog(@"开启wifi 能够定位更为准确!!!");
+    }
+    
+    BOOL isOPen = NO;
+    if ([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
+        isOPen = YES;
+    }
+    if (!isOPen)
+    {
+        //自定义弹框引导用户去 打开定位
+        NSLog(@"您没有打开定位,打开能够更好的为您服务!");
+    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self GetNetWorkData];
+    });
 }
 
 - (void)GetNetWorkData
 {
-    //网络请求获得终点数据
-    self.destinationCoordinate =MACoordinateForMapPoint(MAMapPointForCoordinate(CLLocationCoordinate2DMake(31.57624122,120.30021787)));
+
+    self.destinationCoordinate  = CLLocationCoordinate2DMake(31.57624122, 120.30021787);
     
     CLLocationCoordinate2D start =MACoordinateForMapPoint(self.startPoint);
     if (start.latitude <0 || start.longitude <0)
@@ -85,7 +112,7 @@ static int locationOnce =0;
         return;
     }
     //两点一线 测试专用
-    [self drawTestRoute];
+    //[self drawTestRoute];
     
     //绘制路线
     [self drawTheRoute];
@@ -121,7 +148,6 @@ static int locationOnce =0;
     navi.requireExtension = YES;
     navi.strategy = 0;//速度优先
     
-    static int ceshi =0;
     if (ceshi ==0)
     {
         /* 出发点. */
@@ -134,6 +160,7 @@ static int locationOnce =0;
        /* 出发点. */
        navi.origin = [AMapGeoPoint locationWithLatitude:31.5938896
                                               longitude:120.3171587];
+       self.startPoint =MAMapPointForCoordinate(CLLocationCoordinate2DMake(31.5938896,120.3171587));
    }
     /* 目的地. */
     navi.destination = [AMapGeoPoint locationWithLatitude:self.destinationCoordinate.latitude
@@ -214,29 +241,17 @@ updatingLocation:(BOOL)updatingLocation
     CLLocationCoordinate2D * coords = malloc(2 * sizeof(CLLocationCoordinate2D));
     coords[0] =CLLocationCoordinate2DMake(start.latitude,start.longitude);
     coords[1] =CLLocationCoordinate2DMake(stop.latitude,stop.longitude);
-    if (self.routeAnno)
+    if (!self.routeAnno)
     {
-        [self.map removeAnnotations:self.routeAnno];
-    }
-    self.routeAnno = [NSMutableArray array];
-    for (int i = 0 ; i < 2; i++)
-    {
+        self.routeAnno = [NSMutableArray array];
         XHMoveAnnotation * a = [[XHMoveAnnotation alloc] init];
-        a.coordinate = coords[i];
-        if (i ==0)//第一个点为电工地理位置
-        {
-            a.title = @"电工";
-        }
-        else
-        {
-            a.title = ShowViewKey;
-        }
+        a.coordinate = coords[1];
+        a.title = ShowViewKey;
         a.subtitle =@"route";
         [self.routeAnno addObject:a];
+        [self.map addAnnotations:self.routeAnno];
+        [self.map showAnnotations:self.routeAnno animated:NO];
     }
-    [self.map addAnnotations:self.routeAnno];
-    [self.map showAnnotations:self.routeAnno animated:NO];
-    
 }
 
 #pragma mark --绘制线路的颜色--
@@ -316,7 +331,8 @@ updatingLocation:(BOOL)updatingLocation
 
     if (path.distance>1000)
     {
-        self.statusView.distanceLabel.text =[NSString stringWithFormat:@"%.1ld",path.distance/1000];
+        CGFloat number =path.distance/1000.0;
+        self.statusView.distanceLabel.text =[NSString stringWithFormat:@"%.1f",number];
     }
     else
     {
@@ -351,9 +367,11 @@ updatingLocation:(BOOL)updatingLocation
     [self.naviRoute addToMapView:self.map];
     
     /* 缩放地图使其适应polylines的展示. */
-    [self.map setVisibleMapRect:[CommonUtility mapRectForOverlays:self.naviRoute.routePolylines]
-                        edgePadding:UIEdgeInsetsMake(RoutePlanningPaddingEdge, RoutePlanningPaddingEdge, RoutePlanningPaddingEdge, RoutePlanningPaddingEdge)
-                           animated:YES];
+//    [self.map setVisibleMapRect:[CommonUtility mapRectForOverlays:self.naviRoute.routePolylines]
+//                        edgePadding:UIEdgeInsetsMake(RoutePlanningPaddingEdge, RoutePlanningPaddingEdge, RoutePlanningPaddingEdge, RoutePlanningPaddingEdge)
+//                           animated:YES];
+    
+
 }
 
 #pragma mark --选中标注--
@@ -406,27 +424,6 @@ updatingLocation:(BOOL)updatingLocation
     NSLog(@"LocateUserWithError: %@", error);
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    if (![self isWiFiEnabled])
-    {
-        NSLog(@"开启wifi 能够定位更为准确!!!");
-    }
-    
-    BOOL isOPen = NO;
-    if ([CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied) {
-        isOPen = YES;
-    }
-    if (!isOPen)
-    {
-        //自定义弹框引导用户去 打开定位
-        NSLog(@"您没有打开定位,打开能够更好的为您服务!");
-    }
-}
-
-
 #pragma mark --两点间的直线距离--
 - (NSString *)distanceForUserLocation
 {
@@ -469,7 +466,6 @@ updatingLocation:(BOOL)updatingLocation
         _map = [[MAMapView alloc] initWithFrame:self.view.frame];
         _map.delegate = self;
         _map.showsLabels = YES;
-        
         _map.userTrackingMode =MAUserTrackingModeFollow;//追踪位置更新
         _map.desiredAccuracy =kCLLocationAccuracyBest;//精确度
         _map.distanceFilter =kCLDistanceFilterNone;
